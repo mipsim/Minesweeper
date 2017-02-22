@@ -140,7 +140,30 @@ public class MSButton
            //blobs[r][c-1].mousePressed(); 
          // }
         //}
-        clicked = true;  
+        clicked = true;
+
+        if (keyPressed == true)
+        {
+            marked = !marked;
+        }
+
+        else if (bombs.contains(this))
+        {
+            
+        }
+
+        else if (this.countBombs(r,c) > 0)
+        {
+            this.setLabel(" " + this.countBombs(r,c));
+        }
+
+        else 
+        {
+            if (buttons[r][c].isValid(r,c) == true)
+            {
+                buttons[r][c+1].mousePressed();
+            }
+        }
     }
 
 
@@ -180,17 +203,22 @@ public class MSButton
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        if (bombs.contains(buttons[r-1][c-1]) ||
-            bombs.contains(buttons[r-1][c]) ||
-            bombs.contains(buttons[r-1][c+1]) ||
-            bombs.contains(buttons[r][c-1]) ||
-            bombs.contains(buttons[r][c+1]) ||
-            bombs.contains(buttons[r+1][c-1]) ||
-            bombs.contains(buttons[r+1][c]) ||
-            bombs.contains(buttons[r+1][c+1]) )
-        {
+        if (bombs.contains(buttons[r-1][c-1]))
             numBombs++;
-        }
+        if (bombs.contains(buttons[r-1][c]))
+                numBombs++;
+        if (bombs.contains(buttons[r-1][c+1]))
+                numBombs++;
+        if (bombs.contains(buttons[r][c-1]))
+                numBombs++;
+        if (bombs.contains(buttons[r][c+1]))
+                numBombs++;
+        if (bombs.contains(buttons[r+1][c-1]))
+                numBombs++;
+        if (bombs.contains(buttons[r+1][c]))
+                numBombs++;
+        if (bombs.contains(buttons[r+1][c+1]))
+                numBombs++;    
         return numBombs;
     }
 }
