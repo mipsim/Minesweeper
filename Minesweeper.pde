@@ -39,7 +39,7 @@ void setup ()
 
 public void setBombs()
 {
-    for (int i = 0; i <= 20; i++)
+    for (int i = 0; i <= 50; i++)
     {
         int row = (int)(Math.random()*NUM_ROWS);
         int col = (int)(Math.random()*NUM_COLS);
@@ -144,7 +144,7 @@ public class MSButton
 
         if (keyPressed == true)
         {
-            marked = !marked;
+            marked = true; 
         }
 
         else if (bombs.contains(this))
@@ -157,12 +157,18 @@ public class MSButton
             this.setLabel(" " + this.countBombs(r,c));
         }
 
-        else 
-        {
-            if (buttons[r][c].isValid(r,c) == true)
-            {
-                buttons[r][c+1].mousePressed();
-            }
+        else {
+            if (isValid(r+1,c) == true && isMarked() == false)
+            buttons[r+1][c].mousePressed();
+
+            if (isValid(r-1,c) == true && isMarked() == false)
+            buttons[r-1][c].mousePressed();
+
+            if (isValid(r,c+1) == true && isMarked() == false)
+            buttons[r][c+1].mousePressed();
+
+            if (isValid(r,c-1) == true && isMarked() == false)
+            buttons[r][c-1].mousePressed();
         }
     }
 
@@ -193,9 +199,8 @@ public class MSButton
     public boolean isValid(int r, int c)
     {
         if (r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS )
-        {
-            return true;
-        }
+        return true;
+        
         return false;
     }
 
