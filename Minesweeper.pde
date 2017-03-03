@@ -62,6 +62,7 @@ public void draw ()
         displayWinningMessage();
         noLoop();
     }
+
 }
 
 
@@ -70,8 +71,24 @@ public void draw ()
 
 public boolean isWon()
 {
-    //your code here
-    return false;
+    for(int i = 0; i < bombs.size(); i++)
+    {
+        if(!bombs.get(i).isMarked())
+            return false;
+    }
+
+    for(int r = 0; r < NUM_ROWS; r++)
+    {
+        for(int c = 0; c < NUM_COLS; c++)
+        {
+            if(!bombs.contains(buttons[r][c]))
+            {
+                if(!buttons[r][c].isClicked())
+                    return false;
+            }
+        }
+    }  
+    return true;
 }
 
 
@@ -79,8 +96,31 @@ public boolean isWon()
 
 
 public void displayLosingMessage()
-{
-    //your code here
+{  
+    //figure out, kills program
+    for(int i = 0; i < bombs.size(); i++)
+    {
+        if(bombs.get(i).isClicked() && !bombs.get(i).isMarked())
+        {   
+            for(int j = 0; j < bombs.size(); j++)
+            {   
+                bombs.get(j).mousePressed();
+                for (int t = 4; t < 20; t++)
+                {
+                    buttons[9][t].setLabel("");
+                    buttons[9][t].setColor(255,0,0);
+                }
+                    buttons[9][4].setLabel("Y");
+                    buttons[9][5].setLabel("O");
+                    buttons[9][6].setLabel("U");
+                    buttons[9][7].setLabel("");
+                    buttons[9][8].setLabel("L");
+                    buttons[9][9].setLabel("O");
+                    buttons[9][10].setLabel("S");
+                    buttons[9][11].setLabel("E");
+            }
+        }
+    }
 }
 
 
@@ -89,22 +129,28 @@ public void displayLosingMessage()
 
 public void displayWinningMessage()
 {
-    buttons[9][3].setLabel("C");
-    buttons[9][3].setLabel("O");
-    buttons[9][3].setLabel("N");
-    buttons[9][3].setLabel("G");
-    buttons[9][3].setLabel("R");
-    buttons[9][3].setLabel("A");
-    buttons[9][3].setLabel("T");
-    buttons[9][3].setLabel("U");
-    buttons[9][3].setLabel("L");
-    buttons[9][3].setLabel("A");
-    buttons[9][3].setLabel("T");
-    buttons[9][3].setLabel("I");
-    buttons[9][3].setLabel("O");
-    buttons[9][3].setLabel("N");
-    buttons[9][3].setLabel("S");
-    buttons[9][3].setLabel("!");
+    for (int i = 4; i < 20; i++)
+    {
+        buttons[9][i].setLabel("");
+        buttons[9][i].setColor(0,150,0);
+    }
+
+    buttons[9][4].setLabel("C");
+    buttons[9][5].setLabel("O");
+    buttons[9][6].setLabel("N");
+    buttons[9][7].setLabel("G");
+    buttons[9][8].setLabel("R");
+    buttons[9][9].setLabel("A");
+    buttons[9][10].setLabel("T");
+    buttons[9][11].setLabel("U");
+    buttons[9][12].setLabel("L");
+    buttons[9][13].setLabel("A");
+    buttons[9][14].setLabel("T");
+    buttons[9][15].setLabel("I");
+    buttons[9][16].setLabel("O");
+    buttons[9][17].setLabel("N");
+    buttons[9][18].setLabel("S");
+    buttons[9][19].setLabel("!");
 }
 
 
@@ -145,6 +191,12 @@ public class MSButton
     public boolean isClicked()
     {
         return clicked;
+    }
+    // called by manager
+
+    public boolean setClicked(boolean status)
+    {
+        return status;
     }
     // called by manager
     
