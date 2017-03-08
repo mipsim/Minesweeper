@@ -13,7 +13,7 @@ private ArrayList <MSButton> bombs = new ArrayList <MSButton>(); //ArrayList of 
 
 void setup ()
 {
-    size(553, 420);
+    size(553, 500);
     textAlign(CENTER,CENTER);
     
     // make the manager
@@ -55,7 +55,11 @@ public void setBombs()
 
 public void draw ()
 {
-    background( 0 );
+    background( 180 );
+    textSize(40);
+    fill(255);
+    text("MINES REMAINING: ", 210, 455);
+    rect(410, 436, 80, 45);
 
     if ( isWon() == true )
     {
@@ -314,6 +318,7 @@ public class MSButton
         fill(numRed, numGreen, numBlue);
         textSize(14);
         text(label,x+width/2,y+height/2);
+        text(countBombs(r,c),500,480);
     }
 
 
@@ -359,6 +364,8 @@ public class MSButton
             numBombs++;
         if (isValid(row-1, col-1) == true && bombs.contains(buttons[row-1][col-1]))
             numBombs++;
+
+
            
         return numBombs;
     }
