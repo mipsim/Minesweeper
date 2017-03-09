@@ -197,12 +197,6 @@ public class MSButton
         return clicked;
     }
     // called by manager
-
-    public boolean setClicked(boolean status)
-    {
-        return status;
-    }
-    // called by manager
     
 
     public void mousePressed () 
@@ -318,7 +312,6 @@ public class MSButton
         fill(numRed, numGreen, numBlue);
         textSize(14);
         text(label,x+width/2,y+height/2);
-        text(countBombs(r,c),500,480);
     }
 
 
@@ -364,8 +357,6 @@ public class MSButton
             numBombs++;
         if (isValid(row-1, col-1) == true && bombs.contains(buttons[row-1][col-1]))
             numBombs++;
-
-
            
         return numBombs;
     }
