@@ -66,7 +66,6 @@ public void draw ()
         displayWinningMessage();
         noLoop();
     }
-
 }
 
 
@@ -99,32 +98,37 @@ public boolean isWon()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-public void displayLosingMessage()
-{  
-    //figure out, kills program
+public boolean isLost()
+{
     for(int i = 0; i < bombs.size(); i++)
     {
         if(bombs.get(i).isClicked() && !bombs.get(i).isMarked())
-        {   
-            for(int j = 0; j < bombs.size(); j++)
-            {   
-                bombs.get(j).mousePressed();
-                for (int t = 4; t < 20; t++)
-                {
-                    buttons[9][t].setLabel("");
-                    buttons[9][t].setColor(255,0,0);
-                }
-                    buttons[9][4].setLabel("Y");
-                    buttons[9][5].setLabel("O");
-                    buttons[9][6].setLabel("U");
-                    buttons[9][7].setLabel("");
-                    buttons[9][8].setLabel("L");
-                    buttons[9][9].setLabel("O");
-                    buttons[9][10].setLabel("S");
-                    buttons[9][11].setLabel("E");
-            }
-        }
+            return true;
     }
+    return false;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public void displayLosingMessage()
+{  
+    //your code here
+    for(int i = 0; i < bombs.size(); i++)
+        bombs.get(i).mousePressed();
+    for(int r = 0; r < NUM_ROWS; r++)
+        for(int c = 0; c < NUM_COLS; c++)
+        {
+            buttons[r][c].setLabel("");
+        }
+    buttons[4][1].setLabel("Y");
+    buttons[4][2].setLabel("O");
+    buttons[4][3].setLabel("U");
+    buttons[4][5].setLabel("L");
+    buttons[4][6].setLabel("O");
+    buttons[4][7].setLabel("S");
+    buttons[4][8].setLabel("E");
 }
 
 
@@ -133,28 +137,20 @@ public void displayLosingMessage()
 
 public void displayWinningMessage()
 {
-    for (int i = 4; i < 20; i++)
-    {
-        buttons[9][i].setLabel("");
-        buttons[9][i].setColor(0,150,0);
-    }
-
-    buttons[9][4].setLabel("C");
-    buttons[9][5].setLabel("O");
-    buttons[9][6].setLabel("N");
-    buttons[9][7].setLabel("G");
-    buttons[9][8].setLabel("R");
-    buttons[9][9].setLabel("A");
-    buttons[9][10].setLabel("T");
-    buttons[9][11].setLabel("U");
-    buttons[9][12].setLabel("L");
-    buttons[9][13].setLabel("A");
-    buttons[9][14].setLabel("T");
-    buttons[9][15].setLabel("I");
-    buttons[9][16].setLabel("O");
-    buttons[9][17].setLabel("N");
-    buttons[9][18].setLabel("S");
-    buttons[9][19].setLabel("!");
+    //your code here
+    for(int r = 0; r < NUM_ROWS; r++)
+        for(int c = 0; c < NUM_COLS; c++)
+        {
+            buttons[r][c].setLabel("");
+        }
+    buttons[4][1].setLabel("C");
+    buttons[4][2].setLabel("O");
+    buttons[4][3].setLabel("N");
+    buttons[4][4].setLabel("G");
+    buttons[4][5].setLabel("R");
+    buttons[4][6].setLabel("A");
+    buttons[4][7].setLabel("T");
+    buttons[4][8].setLabel("S");
 }
 
 
