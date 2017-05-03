@@ -13,7 +13,7 @@ private ArrayList <MSButton> bombs = new ArrayList <MSButton>(); //ArrayList of 
 
 void setup ()
 {
-    size(553, 500);
+    size(553, 421);
     textAlign(CENTER,CENTER);
     
     // make the manager
@@ -30,7 +30,7 @@ void setup ()
         }
     }
 
-    for ( int i = 0; i < 60; i++)    
+    for ( int i = 0; i < 5; i++)    
         setBombs();
 }
 
@@ -56,14 +56,15 @@ public void setBombs()
 public void draw ()
 {
     background( 180 );
-    textSize(40);
-    fill(255);
-    text("MINES REMAINING: ", 210, 455);
-    rect(410, 436, 80, 45);
 
-    if ( isWon() == true )
+     if(isWon() == true)
     {
         displayWinningMessage();
+        noLoop();
+    }
+    else if(isLost() == true)
+    {
+        displayLosingMessage();
         noLoop();
     }
 }
@@ -75,22 +76,13 @@ public void draw ()
 public boolean isWon()
 {
     for(int i = 0; i < bombs.size(); i++)
-    {
         if(!bombs.get(i).isMarked())
             return false;
-    }
-
     for(int r = 0; r < NUM_ROWS; r++)
-    {
         for(int c = 0; c < NUM_COLS; c++)
-        {
             if(!bombs.contains(buttons[r][c]))
-            {
                 if(!buttons[r][c].isClicked())
                     return false;
-            }
-        }
-    }  
     return true;
 }
 
@@ -102,8 +94,10 @@ public boolean isLost()
 {
     for(int i = 0; i < bombs.size(); i++)
     {
-        if(bombs.get(i).isClicked() && !bombs.get(i).isMarked())
+        if (bombs.get(i).isClicked() && !bombs.get(i).isMarked())
+        {
             return true;
+        }
     }
     return false;
 }
@@ -117,18 +111,22 @@ public void displayLosingMessage()
     //your code here
     for(int i = 0; i < bombs.size(); i++)
         bombs.get(i).mousePressed();
+    fill(255);
     for(int r = 0; r < NUM_ROWS; r++)
         for(int c = 0; c < NUM_COLS; c++)
         {
             buttons[r][c].setLabel("");
+            buttons[r][c].setColor(0, 0, 0);
         }
-    buttons[4][1].setLabel("Y");
-    buttons[4][2].setLabel("O");
-    buttons[4][3].setLabel("U");
-    buttons[4][5].setLabel("L");
-    buttons[4][6].setLabel("O");
-    buttons[4][7].setLabel("S");
-    buttons[4][8].setLabel("E");
+    buttons[9][8].setLabel("T");
+    buttons[9][9].setLabel("R");
+    buttons[9][10].setLabel("Y");
+    buttons[9][12].setLabel("A");
+    buttons[9][13].setLabel("G");
+    buttons[9][14].setLabel("A");
+    buttons[9][15].setLabel("I");
+    buttons[9][16].setLabel("N");
+    buttons[9][17].setLabel("?");
 }
 
 
@@ -142,15 +140,24 @@ public void displayWinningMessage()
         for(int c = 0; c < NUM_COLS; c++)
         {
             buttons[r][c].setLabel("");
+            buttons[r][c].setColor(0, 0, 0);
         }
-    buttons[4][1].setLabel("C");
-    buttons[4][2].setLabel("O");
-    buttons[4][3].setLabel("N");
-    buttons[4][4].setLabel("G");
-    buttons[4][5].setLabel("R");
-    buttons[4][6].setLabel("A");
-    buttons[4][7].setLabel("T");
-    buttons[4][8].setLabel("S");
+    buttons[9][4].setLabel("C");
+    buttons[9][5].setLabel("O");
+    buttons[9][6].setLabel("N");
+    buttons[9][7].setLabel("G");
+    buttons[9][8].setLabel("R");
+    buttons[9][9].setLabel("A");
+    buttons[9][10].setLabel("T");
+    buttons[9][11].setLabel("U");
+    buttons[9][12].setLabel("L");
+    buttons[9][13].setLabel("A");
+    buttons[9][14].setLabel("T");
+    buttons[9][15].setLabel("I");
+    buttons[9][16].setLabel("O");
+    buttons[9][17].setLabel("N");
+    buttons[9][18].setLabel("S");
+    buttons[9][19].setLabel("!");
 }
 
 
@@ -211,10 +218,10 @@ public class MSButton
             } 
         }
 
-        else if (bombs.contains(this))
-        {
-            displayLosingMessage();
-        }
+        //else if (bombs.contains(this))
+        //{
+        //    setLabel(""+countBombs(r, c));
+        //}
 
         else if(!bombs.contains(this) && countBombs(r, c) > 0)
         {
